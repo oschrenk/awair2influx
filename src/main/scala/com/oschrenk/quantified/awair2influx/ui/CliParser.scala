@@ -5,9 +5,9 @@ import java.io.File
 import scopt.OptionParser
 
 object Options {
-  def default: Options = Options(None, None)
+  def default: Options = Options(None, Seq.empty)
 }
-case class Options(location: Option[String], path: Option[File])
+case class Options(location: Option[String], files: Seq[File])
 
 class CliParser() {
 
@@ -15,8 +15,15 @@ class CliParser() {
     head("awair2influx")
 
     opt[String]('l', "location")
-      .action{(location, o) =>
+      .action((location, o) =>
         o.copy(location = Some(location))
-      }
+      )
+
+    arg[File]("<file.csv> ...")
+      .unbounded().required()
+      .text("csv files")
+      .action( (f, o) =>
+        o.copy(files = o.files :+ f)
+      )
   }
 }

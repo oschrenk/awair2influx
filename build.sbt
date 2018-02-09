@@ -6,11 +6,9 @@ scalaVersion := "2.12.4"
 
 libraryDependencies ++= Seq(
   "com.github.scopt" %% "scopt" % "3.7.0",
-  "com.github.pathikrit" %% "better-files" % "3.4.0",
-  "com.typesafe" % "config" % "1.3.2",
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.7.2",
-  "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+  "com.nrinaudo" %% "kantan.csv" % "0.3.1",
+  "com.nrinaudo" %% "kantan.csv-generic" % "0.3.1",
+  "com.nrinaudo" %% "kantan.csv-java8" % "0.3.1",
 )
 
 scalacOptions ++= Seq(
@@ -52,12 +50,13 @@ scalacOptions ++= Seq(
   "-Ywarn-nullary-override",           // Warn when non-nullary `def f()' overrides nullary `def f'.
   "-Ywarn-nullary-unit",               // Warn when nullary methods return Unit.
   "-Ywarn-numeric-widen",              // Warn when numerics are widened.
-  "-Ywarn-unused:implicits",           // Warn if an implicit parameter is unused.
   "-Ywarn-unused:imports",             // Warn if an import selector is not referenced.
-  "-Ywarn-unused:locals",              // Warn if a local definition is unused.
   "-Ywarn-unused:params",              // Warn if a value parameter is unused.
   "-Ywarn-unused:patvars",             // Warn if a variable bound in a pattern is unused.
-  "-Ywarn-unused:privates",            // Warn if a private member is unused.
+  // I need to disable all three to use kanban.csv.CellDecoder for LocalDateTime
+  //  "-Ywarn-unused:locals",              // Warn if a local definition is unused.
+  //  "-Ywarn-unused:implicits",           // Warn if an implicit parameter is unused.
+  //  "-Ywarn-unused:privates",            // Warn if a private member is unused.
   "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
 )
 
