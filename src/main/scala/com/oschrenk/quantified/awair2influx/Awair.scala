@@ -28,17 +28,17 @@ object Awair {
 
         val measurements = paths.head.unsafeReadCsv[List, Measurement](rfc.withHeader)
 
-        // temperature,location=livingroom value=17.54 1513869300000000
-        // humidity,location=livingroom value=76.39 1513869300000000
-        // carbon_dioxide,location=livingroom value=777.0 1513869300000000
-        // chemicals,location=livingroom value=359.0 1513869300000000
-        // dust,location=livingroom value=27.3 1513869300000000
+        // temperature,location=livingroom value=17.54 1513869300000000000
+        // humidity,location=livingroom value=76.39 1513869300000000000
+        // carbon_dioxide,location=livingroom value=777.0 1513869300000000000
+        // chemicals,location=livingroom value=359.0 1513869300000000000
+        // dust,location=livingroom value=27.3 1513869300000000000
         def print(field: String, location: Option[String], value: Float, timestamp: LocalDateTime): String = {
           val tag = location match {
             case Some(l) => s",location=$l"
             case None => ""
           }
-          s"$field$tag value=$value ${timestamp.toEpochSecond(ZoneOffset.UTC) * 1000 * 1000}"
+          s"$field$tag value=$value ${timestamp.toEpochSecond(ZoneOffset.UTC) * 1000 * 1000 * 1000}"
         }
 
         measurements.foreach{ measurement =>
